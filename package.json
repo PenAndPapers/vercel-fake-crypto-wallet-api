@@ -1,10 +1,14 @@
 {
   "name": "vercel-fake-crypto-wallet-api",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "main": "server.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",

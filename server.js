@@ -15,4 +15,4 @@ app.use('/news', newsRoutes)
 app.use('/videos', videoRoutes)
 
 
-app.listen(3001, () => console.log({ message: 'Server has been started'}))
+app.listen(3001, () => console.log({ message: 'Server has been started', port: 3001 }))
