@@ -1,10 +1,9 @@
 const express = require('express')
-const path = require('path')
 
-// import routes
-const cryptoRoutes = require('./routes/crypto')
-const newsRoutes = require('./routes/news')
-const videoRoutes = require('./routes/videos')
+// import api routes
+const cryptoRoutes = require('./api/crypto')
+const newsRoutes = require('./api/news')
+const videoRoutes = require('./api/videos')
 
 const app = express()
 
