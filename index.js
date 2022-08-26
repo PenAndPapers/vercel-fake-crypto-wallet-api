@@ -1,21 +1,16 @@
 const express = require('express')
 
-// import api routes
+// import api's
 const cryptoRoutes = require('./api/crypto')
 const newsRoutes = require('./api/news')
 const videoRoutes = require('./api/videos')
 
 const app = express()
-
 app.use(express.json())
-
-app.use('/', (req, res) => {
-  res.json({ message: 'hello world' })
-})
 
 app.use('/crypto', cryptoRoutes)
 app.use('/news', newsRoutes)
 app.use('/videos', videoRoutes)
 
-
-app.listen(3001, () => console.log({ message: 'Server has been started', port: 3001 }))
+const port = process.env.PORT || 9001
+app.listen(port, () => console.log({ message: 'Server has been started', port: port }))

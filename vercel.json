@@ -10,18 +10,6 @@
     {
       "src": "/(.*)",
       "dest": "/"
-    },
-    {
-      "src": "/crypto",
-      "dest": "/api/crypto.js"
-    },
-    {
-      "src": "/news",
-      "dest": "/api/news.js"
-    },
-    {
-      "src": "/videos",
-      "dest": "/api/videos.js"
     }
   ]
 }
