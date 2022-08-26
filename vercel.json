@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/(.*)",
+      "dest": "/"
+    },
+    {
       "src": "/crypto",
       "dest": "/api/crypto.js"
     },
