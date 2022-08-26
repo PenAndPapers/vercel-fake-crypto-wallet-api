@@ -20,7 +20,7 @@ router.post('/login', (req,res) => {
     res.send({
       data: {
         email,
-        requireOtp: Math.floor(Math.random() * (10 - 1 + 1)) + 1 > 5 ? true : false
+        requireOtp: (Math.floor(Math.random() * (10 - 1 + 1)) + 1) > 5 ? true : false
       }
     })
   } catch (err) {
