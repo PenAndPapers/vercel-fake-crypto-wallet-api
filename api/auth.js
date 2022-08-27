@@ -15,10 +15,10 @@ router.post('/login', (req,res) => {
     if (Object.keys(error).length) return res.status(400).json({ error })
 
     // TODO user verification
-
+    
     const passwordHash = bcrypt.hashSync(password, 10)
-    const authHash = bcrypt.hashSync(email, 10)
     const requireOtp = ((Math.floor(Math.random() * (10 - 1 + 1)) + 1) > 5) ? true : false
+    const authHash = requireOtp ? bcrypt.hashSync(email, 10) : null
 
     res.send({
       data: { email, requireOtp, authHash }
