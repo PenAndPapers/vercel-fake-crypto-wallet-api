@@ -82,6 +82,28 @@ router.post('/register', async (req,res) => {
   }
 })
 
+router.post('/update-password', async (req,res) => {
+  try {
+    const { newPassword, confirmPassword } = req.body
+    const error = {}
+
+    if (!newPassword) error.newPassword = 'Password is required.'
+    if (!confirmPassword) error.confirmPassword = 'Confirm password is required.'
+    if (newPassword && confirmPassword && (newPassword !== confirmPassword)) error.password = 'Password is does not match.'
+    if (Object.keys(error).length) return res.status(400).json({ error })
+
+    res.send({
+      data: {
+        message: "Password has been updated."
+      }
+    })
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    })
+  }
+})
+
 router.post('/forgot-password', async (req,res) => {
   try {
     const { email, } = req.body
@@ -104,5 +126,6 @@ router.post('/forgot-password', async (req,res) => {
     })
   }
 })
+
 
 module.exports = router
