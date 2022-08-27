@@ -2,8 +2,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const router = express.Router()
-const defaultSecret = 'ThWmZq4t7w!z%C*F-JaNcRfUjXn2r5u8x/A?D(G+KbPeSgVkYp3s6v9y$B&E)H@McQfTjWmZq4t7w!z%C*F-JaNdRgUkXp2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)'
-const defaultOTP = '999999'
+const defaults = require('../default/index')
 
 router.post('/login', (req,res) => {
   try {
@@ -37,7 +36,7 @@ router.post('/otp', (req,res) => {
     const error = {}
 
     if (!otp) error.otp  = 'OTP is required'
-    if (otp && otp !== defaultOTP) error.otp = 'OTP is not valid'
+    if (otp && otp !== defaults.otp) error.otp = 'OTP is not valid'
     if (!email) error.email  = 'Email is required'
     if (email && !/^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/.test(email)) error.email = 'Email is not valid'
     if (Object.keys(error).length) return res.status(400).json({ error })
@@ -46,7 +45,7 @@ router.post('/otp', (req,res) => {
 
     res.send({
       data: {
-        accessToken: jwt.sign({ email: req.body.email, date: new Date() }, defaultSecret)
+        accessToken: jwt.sign({ email: req.body.email, date: new Date() }, defaults.secret)
       }
     })
   } catch (err) {
@@ -84,12 +83,12 @@ router.post('/register', async (req,res) => {
 
 router.post('/update-password', async (req,res) => {
   try {
-    const { newPassword, confirmPassword } = req.body
+    const { password, confirmPassword } = req.body
     const error = {}
 
-    if (!newPassword) error.newPassword = 'Password is required.'
+    if (!password) error.password = 'Password is required.'
     if (!confirmPassword) error.confirmPassword = 'Confirm password is required.'
-    if (newPassword && confirmPassword && (newPassword !== confirmPassword)) error.password = 'Password is does not match.'
+    if (password && confirmPassword && (password !== confirmPassword)) error.password = 'Password is does not match.'
     if (Object.keys(error).length) return res.status(400).json({ error })
 
     res.send({
