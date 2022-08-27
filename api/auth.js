@@ -16,7 +16,8 @@ router.post('/login', (req,res) => {
     if (Object.keys(error).length) return res.status(400).json({ error })
 
     // TODO user verification
-
+    // DB verification  if user exist and password is same
+    
     res.send({
       data: {
         email,
