@@ -16,13 +16,13 @@ router.post('/login', (req,res) => {
     if (Object.keys(error).length) return res.status(400).json({ error })
 
     // TODO user verification
-    // DB verification  if user exist and password is same
-    
+
+    const passwordHash = bcrypt.hashSync(password, 10)
+    const authHash = bcrypt.hashSync(email, 10)
+    const requireOtp = ((Math.floor(Math.random() * (10 - 1 + 1)) + 1) > 5) ? true : false
+
     res.send({
-      data: {
-        email,
-        requireOtp: ((Math.floor(Math.random() * (10 - 1 + 1)) + 1) > 5) ? true : false
-      }
+      data: { email, requireOtp, authHash }
     })
   } catch (err) {
     res.status(500).json({
